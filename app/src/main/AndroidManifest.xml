@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".bean.RegisterActivity">
+        <activity android:name=".RegisterActivity">
 
         </activity>
     </application>

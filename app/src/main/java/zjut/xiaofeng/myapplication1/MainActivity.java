@@ -14,8 +14,6 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import zjut.xiaofeng.myapplication1.bean.RegisterActivity;
-
 public class MainActivity extends AppCompatActivity {
     //分别声明布局文件中用到的变量
     private EditText usernameEdit;
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        Intent intent = new Intent();
         String userName = usernameEdit.getText().toString();
         String password = passwordEdit.getText().toString();
 
@@ -56,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View w) {
-                Intent intent = new Intent();
                 //前一个（MainActivity.this）是目前页面，后面一个是要跳转的下一个页面
                 intent.setClass(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
@@ -74,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "用户名或密码错误，请重试", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                    intent.setClass(MainActivity.this, LoginSuccessActivity.class);
+                    startActivity(intent);
                 }
             }
         });

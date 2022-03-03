@@ -1,4 +1,4 @@
-package zjut.xiaofeng.myapplication1.bean;
+package zjut.xiaofeng.myapplication1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import zjut.xiaofeng.myapplication1.R;
 import zjut.xiaofeng.myapplication1.util.MD5Util;
 
 public class RegisterActivity extends AppCompatActivity {
