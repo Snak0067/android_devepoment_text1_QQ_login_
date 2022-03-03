@@ -28,14 +28,13 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-
-        String userName = usernameEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
-        String rePassword = rePasswordEdit.getText().toString();
-
+        initView();
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String userName = usernameEdit.getText().toString();
+                String password = passwordEdit.getText().toString();
+                String rePassword = rePasswordEdit.getText().toString();
                 if (TextUtils.isEmpty(userName)) {
                     Toast.makeText(RegisterActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(password)) {
@@ -73,10 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void initView() {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        usernameEdit = findViewById(R.id.register_username);
-        passwordEdit = findViewById(R.id.register_password);
-        rePasswordEdit = findViewById(R.id.register_rePassword);
-        button_register = findViewById(R.id.register_button);
+        usernameEdit = (EditText) findViewById(R.id.register_username);
+        passwordEdit = (EditText) findViewById(R.id.register_password);
+        rePasswordEdit = (EditText) findViewById(R.id.register_rePassword);
+        button_register = (Button) findViewById(R.id.register_button);
 
     }
 

@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import zjut.xiaofeng.myapplication1.util.MD5Util;
+
 public class MainActivity extends AppCompatActivity {
     //分别声明布局文件中用到的变量
     private EditText usernameEdit;
@@ -46,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         Intent intent = new Intent();
-        String userName = usernameEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
+
 
         /**
          * 监听是否点击注册按钮，点击则跳转到注册界面
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String userName = usernameEdit.getText().toString();
+                String password = passwordEdit.getText().toString();
                 if (TextUtils.isEmpty(userName)) {
                     Toast.makeText(MainActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(password)) {
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         //获取密码
         String password_stored = sp.getString(userName, "");//传入用户名获取密码
         //如果密码不为空则确实保存过这个用户名
-        if (password_stored != null && password_stored.equals(password)) {
+        if (password_stored != null && password_stored.equals(MD5Util.MD5(password))) {
             return true;
         }
         return false;
