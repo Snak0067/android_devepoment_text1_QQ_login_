@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application1</string>
+    <string name="QQ_logo_word">QQ</string>
+    <string name="QQ_logo_username_input_hint">请输入用户名</string>
+    <string name="QQ_logo_password_input_hint">请输入密码</string>
+    <string name="QQ_logo_user_agreement_left">已阅读并同意</string>
+    <string name="QQ_logo_user_agreement_and">和</string>
+    <string name="QQ_logo_user_agreement_service">服务协议</string>
+    <string name="QQ_logo_user_agreement_privacy">QQ隐私保护指引</string>
+    <string name="login_loginByPhone">手机号登陆</string>
+    <string name="login_findPassword">找回密码</string>
+    <string name="login_register">新用户注册</string>
+</resources>
