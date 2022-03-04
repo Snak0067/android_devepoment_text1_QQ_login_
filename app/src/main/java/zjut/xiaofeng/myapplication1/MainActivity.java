@@ -6,12 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import zjut.xiaofeng.myapplication1.util.MD5Util;
@@ -25,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button_loginByPhone;
     private Button button_reFindPassword;
     private Button button_register;
+    private ImageView icon_eye_hide, icon_eye_show;
+    private RelativeLayout login_password_status_layout;
     //声明数据存储对象
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -39,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         button_loginByPhone = findViewById(R.id.btn_phone);
         button_reFindPassword = findViewById(R.id.btn_retrieve);
         button_register = findViewById(R.id.btn_register);
+        icon_eye_hide = findViewById(R.id.login_password_hide_icon);
+        icon_eye_show = findViewById(R.id.login_password_show_icon);
 
     }
 
@@ -61,6 +71,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
+        });
+        icon_eye_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePwdHideStatus(view);
+            }
+        });
+        icon_eye_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePwdHideStatus(view);
+            }
         });
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,5 +121,49 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void changePwdHideStatus(View view) {
+        switch (view.getId()) {
+            case R.id.login_password_hide_icon:
+                showPassword(passwordEdit, icon_eye_hide, icon_eye_show);
+                break;
+            case R.id.login_password_show_icon:
+                hidePassword(passwordEdit, icon_eye_hide, icon_eye_show);
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void hidePassword(EditText passwordEdit, ImageView icon_eye_hide, ImageView icon_eye_show) {
+        //令隐藏的眼睛可见 令睁开的眼睛不可见
+        icon_eye_hide.setVisibility(View.VISIBLE);
+        icon_eye_show.setVisibility(View.INVISIBLE);
+        //隐藏密码方法
+        PasswordTransformationMethod method = PasswordTransformationMethod.getInstance();
+        passwordEdit.setTransformationMethod(method);
+        CharSequence charSequence = passwordEdit.getText();
+        //切换后将EditText光标置于末尾
+        if (charSequence instanceof Spannable) {
+            Spannable spanText = (Spannable) charSequence;
+            Selection.setSelection(spanText, charSequence.length());
+        }
+    }
+
+    public static void showPassword(EditText passwordEdit, ImageView icon_eye_hide, ImageView icon_eye_show) {
+        //令隐藏的眼睛不可见 令睁开的眼睛可见
+        icon_eye_hide.setVisibility(View.INVISIBLE);
+        icon_eye_show.setVisibility(View.VISIBLE);
+        //显示密码方法一
+        HideReturnsTransformationMethod method = HideReturnsTransformationMethod.getInstance();
+        passwordEdit.setTransformationMethod(method);
+        // 切换后将EditText光标置于末尾
+        CharSequence charSequence = passwordEdit.getText();
+        if (charSequence instanceof Spannable) {
+            Spannable spanText = (Spannable) charSequence;
+            Selection.setSelection(spanText, charSequence.length());
+        }
     }
 }
